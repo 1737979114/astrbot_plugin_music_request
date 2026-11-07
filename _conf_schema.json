@@ -1,0 +1,106 @@
+{
+  "enable": {
+    "description": "启用点歌",
+    "type": "bool",
+    "default": true
+  },
+  "sources": {
+    "description": "音源（按顺序搜索）",
+    "type": "list",
+    "default": [
+      "netease",
+      "qq",
+      "kuwo"
+    ],
+    "hint": "可选 netease（网易云）、qq（QQ音乐）、kuwo（酷我）、audius（Audius，国内访问不稳，默认不开）。国内建议只开前三个；QQ音乐风控严，短时间点太多会临时跳过"
+  },
+  "use_ai": {
+    "description": "用 AI 理解点歌意图",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后会把「来首周杰伦那种伤感情歌」拆成歌手+歌名；关掉则直接用原话搜索"
+  },
+  "llm_provider_id": {
+    "description": "AI 使用的模型",
+    "type": "string",
+    "default": "",
+    "_special": "select_provider",
+    "hint": "留空使用当前会话默认模型；建议选响应快的模型"
+  },
+  "default_keywords": {
+    "description": "不指定歌名时随机点播的关键词",
+    "type": "list",
+    "default": [
+      "周杰伦 晴天",
+      "告白气球",
+      "起风了",
+      "平凡之路",
+      "光年之外"
+    ],
+    "hint": "用户只发「点歌」时会从这里面随机挑一个"
+  },
+  "search_limit": {
+    "description": "搜索返回条数",
+    "type": "int",
+    "default": 20,
+    "hint": "每个音源搜索多少条再合并排序，20 条命中率更高"
+  },
+  "probe_limit": {
+    "description": "最多尝试几首可播放",
+    "type": "int",
+    "default": 5,
+    "hint": "版权歌经常不可播，会依次探测前几首；数值越大越慢但成功率越高"
+  },
+  "enable_choice": {
+    "description": "点歌后列出候选，回复序号选择",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后点歌会先列出前几首，用户回复数字再播放；关闭后直接播匹配度最高的一首"
+  },
+  "choice_count": {
+    "description": "候选数量上限",
+    "type": "int",
+    "default": 10,
+    "hint": "列出来让用户回复序号挑选，最多 15 个；太多消息会很长"
+  },
+  "choice_timeout": {
+    "description": "选择等待时间（秒）",
+    "type": "int",
+    "default": 120,
+    "hint": "超时后序号失效，需要重新点歌"
+  },
+  "send_mode": {
+    "description": "发送方式",
+    "type": "string",
+    "options": [
+      "card",
+      "record",
+      "text"
+    ],
+    "default": "record",
+    "hint": "record 语音消息（截取前 N 秒，适合群里直接听）；card 音乐卡片；text 只发歌名和直链"
+  },
+  "rate_limit_seconds": {
+    "description": "同一用户点歌冷却（秒）",
+    "type": "int",
+    "default": 5,
+    "hint": "防止连续点歌刷屏，设为 0 关闭"
+  },
+  "request_timeout": {
+    "description": "音乐接口超时（秒）",
+    "type": "int",
+    "default": 10
+  },
+  "record_max_seconds": {
+    "description": "语音时长上限（秒）",
+    "type": "int",
+    "default": 60,
+    "hint": "只发前 N 秒，太长会转码慢且容易被平台拒收"
+  },
+  "record_max_parts": {
+    "description": "最多发几段语音",
+    "type": "int",
+    "default": 6,
+    "hint": "整首按每段 N 秒切开，超过这个段数只发前几段，防止刷屏"
+  }
+}

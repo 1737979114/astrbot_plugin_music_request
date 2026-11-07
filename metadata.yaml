@@ -1,0 +1,15 @@
+name: astrbot_plugin_music_request
+display_name: "点歌"
+desc: "群里点歌免费听：AI 理解点歌意图，在网易云、QQ音乐、酷我、Audius 四个免登录音源里并发搜索，自动挑出能播放的版本，按 60 秒切段以语音消息发送，可听完整首（也可切换音乐卡片或直链）；版权歌不可播时会自动换版本并给出提示。"
+short_desc: "AI 点歌，免费听，自动挑能播的版本"
+version: 1.4.0
+author: WorkBuddy
+repo: https://github.com/1737979114/astrbot_plugin_music_request
+astrbot_version: ">=4.5.0,<5"
+support_platforms:
+  - aiocqhttp
+  - qq_official
+  - telegram
+  - discord
+tags:
+  - music
