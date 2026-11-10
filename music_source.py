@@ -11,16 +11,15 @@
 from __future__ import annotations
 
 import asyncio
-import logging
 from typing import Any
+
+from astrbot.api import logger
 
 from music_core import Song
 from audius import AudiusClient
 from kuwo import KuwoClient
 from netease import NeteaseClient
 from qq import QQMusicClient
-
-logger = logging.getLogger(__name__)
 
 
 class MusicSource:

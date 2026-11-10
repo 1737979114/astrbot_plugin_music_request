@@ -6,7 +6,6 @@
 
 import asyncio
 import importlib.util
-import logging
 import os
 import sys
 import tempfile
@@ -49,6 +48,25 @@ class FakePlain:
         self.text = text
 
 
+class FakeLogger:
+    """测试用 logger 桩，避免依赖内置 logging 模块。"""
+
+    def debug(self, *args, **kwargs):
+        pass
+
+    def info(self, *args, **kwargs):
+        pass
+
+    def warning(self, *args, **kwargs):
+        pass
+
+    def error(self, *args, **kwargs):
+        pass
+
+    def exception(self, *args, **kwargs):
+        pass
+
+
 def _ensure_astrbot() -> None:
     if "astrbot" in sys.modules:
         api = sys.modules.get("astrbot.api")
@@ -66,7 +84,7 @@ def _ensure_astrbot() -> None:
 
     astrbot = types.ModuleType("astrbot")
     api = types.ModuleType("astrbot.api")
-    api.logger = logging.getLogger("fake.astrbot")
+    api.logger = FakeLogger()
     api.AstrBotConfig = dict
 
     event_mod = types.ModuleType("astrbot.api.event")
